@@ -1,18 +1,41 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+  <layout name="LayoutDefault">
+    <div class="Home">
+      <h1>Home</h1>
+      <product-list :products="products" />
+    </div>
+  </layout>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import ProductList from "@/components/products/ProductList";
 
 export default {
-  name: "home",
+  name: "Home",
   components: {
-    HelloWorld
+    ProductList
+  },
+  data() {
+    return {
+      products: []
+    };
+  },
+  mounted() {
+    this.$firebase.db
+      .collection("products")
+      .orderBy("createdAt")
+      .onSnapshot(snapShot => {
+        this.products = [];
+        snapShot.forEach(product => {
+          this.products.push({
+            id: product.id,
+            createdAt: product.data().createdAt,
+            description: product.data().description,
+            image: product.data().image,
+            title: product.data().title
+          });
+        });
+      });
   }
 };
 </script>

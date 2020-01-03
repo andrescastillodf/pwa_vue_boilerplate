@@ -1,8 +1,9 @@
 /* eslint-disable no-console */
 
 import { register } from "register-service-worker";
-
+console.log("hola", process.env.NODE_ENV);
 if (process.env.NODE_ENV === "production") {
+  console.log("asked to register sw");
   register(`${process.env.BASE_URL}service-worker.js`, {
     ready() {
       console.log(
