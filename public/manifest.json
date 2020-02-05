@@ -1,6 +1,10 @@
 {
   "name": "sipay-pwa-example",
   "short_name": "pwa-example",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "blue",
+  "background_color": "green",
   "icons": [
     {
       "src": "windows10/Square71x71Logo.scale-400.png",
@@ -310,9 +314,5 @@
       "src": "firefox/firefox-general-16-16.png",
       "sizes": "16x16"
     }
-  ],
-  "start_url": "./index.html",
-  "display": "standalone",
-  "theme_color": "#d2523c",
-  "background_color": "#e9e9e9"
+  ]
 }
