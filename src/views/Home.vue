@@ -2,7 +2,7 @@
   <LayoutManager :name="$system_config.viewSettings.Home.layout">
     <div class="Home">
       <h1>Home</h1>
-      {{ $system_config.viewSettings.Home.layout }}
+      I use {{ $system_config.viewSettings.Home.layout }}
       <!-- <product-list :products="products" /> -->
     </div>
   </LayoutManager>
