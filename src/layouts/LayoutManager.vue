@@ -10,29 +10,20 @@ export default {
       default: ""
     }
   },
-  created() {
+  async created() {
     let activeLayout =
       this.name != "" ? this.name : this.$system_config.layoutDefault;
-    // eslint-disable-next-line no-console
-    // console.log(this.$system_config);
     // Check if the layout component
     // has already been registered.
 
     if (!Vue.options.components[activeLayout]) {
-      // eslint-disable-next-line no-console
-      console.log("entro en cargar layout");
-      Vue.component(activeLayout, () => {
-        // eslint-disable-next-line no-console
-        console.log(activeLayout);
-        import(`@/layouts/${activeLayout}.vue`).then(e => {
-          // eslint-disable-next-line no-console
-          console.log("loaded layout", e);
-          this.$parent.$emit("update:layout", e);
-          return e;
-        });
+      // eslint-disable-next-line no-unused-vars
+      Vue.component(activeLayout, function(resolve) {
+        require([`../layouts/${activeLayout}.vue`], resolve);
       });
     }
-
+    // eslint-disable-next-line no-console
+    console.log({ ...Vue.options.components });
     this.$parent.$emit("update:layout", activeLayout);
   },
   render() {

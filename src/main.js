@@ -8,12 +8,12 @@ import vuetify from "./plugins/vuetify";
 // load layout
 import LayoutDefault from "./layouts/LayoutDefault.vue";
 import LayoutManager from "./layouts/LayoutManager.vue";
-import LayoutError from "./layouts/LayoutError.vue";
-import LayoutMain from "./layouts/LayoutMain.vue";
+// import LayoutError from "./layouts/LayoutError.vue";
+// import LayoutMain from "./layouts/LayoutMain.vue";
 Vue.component("LayoutManager", LayoutManager);
 Vue.component("LayoutDefault", LayoutDefault);
-Vue.component("LayoutError", LayoutError);
-Vue.component("LayoutMain", LayoutMain);
+// Vue.component("LayoutError", LayoutError);
+// Vue.component("LayoutMain", LayoutMain);
 // end layout
 
 import axios from "axios";
