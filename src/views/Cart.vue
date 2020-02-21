@@ -1,9 +1,9 @@
 <template>
-  <layout name="LayoutDefault">
+  <LayoutManager :name="$system_config.viewSettings.Cart.layout">
     <div class="cart">
       <h1>This is cart page</h1>
     </div>
-  </layout>
+  </LayoutManager>
 </template>
 
 <script>

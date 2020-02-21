@@ -1,5 +1,5 @@
 <template>
-  <layout name="LayoutDefault">
+  <LayoutManager :name="$system_config.viewSettings.ProductEdition.layout">
     <v-container grid-list-xs>
       <v-layout>
         <v-flex>
@@ -51,7 +51,7 @@
         </v-flex>
       </v-layout>
     </v-container>
-  </layout>
+  </LayoutManager>
 </template>
 
 <script>

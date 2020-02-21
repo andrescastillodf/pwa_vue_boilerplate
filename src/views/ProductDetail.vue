@@ -1,5 +1,5 @@
 <template>
-  <layout name="LayoutDefault">
+  <LayoutManager :name="$system_config.viewSettings.ProductDetail.layout">
     <v-container grid-list-xs>
       <v-layout column v-if="!!product">
         <v-flex>
@@ -11,7 +11,7 @@
         </v-flex>
       </v-layout>
     </v-container>
-  </layout>
+  </LayoutManager>
 </template>
 
 <script>

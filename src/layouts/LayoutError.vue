@@ -1,11 +1,17 @@
 <template>
-  <div>
-    error header
+  <div class="Layout">
+    <nav class="Layout__nav">
+      <router-link to="/">Home</router-link>
+    </nav>
+    Header - Error Layout
     <br />
     <br />
-    <slot />
+    <main class="Layout__error">
+      <slot />
+    </main>
     <br />
-    <br />
-    error footer
+    <footer class="Layout__footer">
+      &copy; Error Footer
+    </footer>
   </div>
 </template>

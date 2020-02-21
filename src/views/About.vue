@@ -1,9 +1,12 @@
 <template>
-  <layout name="LayoutDefault">
+  <LayoutManager>
+    <!-- <LayoutManager :name="$system_config.viewSettings.About.layout">-->
     <div class="about">
-      <h1>This is an about page</h1>
+      <h1>
+        This is an about page - no layout so it is using the default Layout
+      </h1>
     </div>
-  </layout>
+  </LayoutManager>
 </template>
 
 <script>

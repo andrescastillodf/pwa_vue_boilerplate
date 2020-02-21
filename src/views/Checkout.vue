@@ -1,9 +1,9 @@
 <template>
-  <layout>
+  <LayoutManager :name="$system_config.viewSettings.Checkout.layout">
     <div class="checkout">
       <h1>This is checkout page</h1>
     </div>
-  </layout>
+  </LayoutManager>
 </template>
 
 <script>

@@ -1,9 +1,9 @@
 <template>
-  <layout name="NotFoundPageLayout">
+  <LayoutManager :name="$system_config.viewSettings.error404.layout">
     <div class="404">
       <h1>404</h1>
     </div>
-  </layout>
+  </LayoutManager>
 </template>
 
 <script>

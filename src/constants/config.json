@@ -1,0 +1,38 @@
+{
+  "environment": "develop",
+  "layoutDefault": "LayoutDefault",
+  "viewSettings": {
+    "Home":{
+      "adminOnly":false,
+      "layout":"LayoutMain"
+    },
+    "error404":{
+      "adminOnly":false,
+      "layout":"LayoutError"
+    },
+    "About":{
+      "adminOnly":false,
+      "layout":"LayoutMain"
+    },
+    "Cart":{
+      "adminOnly":false,
+      "layout":"LayoutMain"
+    },
+    "Checkout":{
+      "adminOnly":false,
+      "layout":"LayoutMain"
+    },
+    "Error":{
+      "adminOnly":false,
+      "layout":"LayoutMain"
+    },
+    "ProductDetail":{
+      "adminOnly":false,
+      "layout":"LayoutMain"
+    },
+    "ProductEdition":{
+      "adminOnly":true,
+      "layout":"LayoutMain"
+    }
+  }
+}

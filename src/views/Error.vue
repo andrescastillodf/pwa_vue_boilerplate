@@ -1,9 +1,9 @@
 <template>
-  <layout name="LayoutError">
+  <LayoutManager :name="$system_config.viewSettings.error404.layout">
     <div class="Error">
       <h1>Error</h1>
     </div>
-  </layout>
+  </LayoutManager>
 </template>
 
 <script>

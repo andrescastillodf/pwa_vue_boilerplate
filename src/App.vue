@@ -11,8 +11,14 @@ export default {
   name: "App",
   data() {
     return {
-      layout: "div"
+      layout: this.$system_config.layoutDefault
     };
+  },
+  watch: {
+    layout() {
+      // eslint-disable-next-line no-console
+      console.log("layout watcher changed ", this.layout);
+    }
   }
 };
 </script>

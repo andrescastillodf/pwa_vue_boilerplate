@@ -1,27 +1,28 @@
 <template>
-  <layout name="LayoutDefault">
+  <LayoutManager :name="$system_config.viewSettings.Home.layout">
     <div class="Home">
       <h1>Home</h1>
-      <product-list :products="products" />
+      {{ $system_config.viewSettings.Home.layout }}
+      <!-- <product-list :products="products" /> -->
     </div>
-  </layout>
+  </LayoutManager>
 </template>
 
 <script>
-import ProductList from "@/components/products/ProductList";
+// import ProductList from "@/components/products/ProductList";
 
 export default {
   name: "Home",
-  components: {
-    ProductList
-  },
+  // components: {
+  //   ProductList
+  // },
   data() {
     return {
       products: []
     };
   },
   mounted() {
-    this.$firebase.db
+    /*this.$firebase.db
       .collection("products")
       .orderBy("createdAt")
       .onSnapshot(snapShot => {
@@ -36,6 +37,7 @@ export default {
           });
         });
       });
+    */
   }
 };
 </script>
