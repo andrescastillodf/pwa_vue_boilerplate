@@ -1,0 +1,55 @@
+- hosts: all
+  remote_user: ci
+  vars:
+    project_name: tecs_app
+    project_ip: "172.19.10.227"
+    envname: "{{ build_env }}"
+    benv: "{{ build_branch }}"
+    network: "int1"
+    docker_registry: "registry.sipay.local"
+    image: "tecs_app:{{ benv }}"
+
+  vars_files:
+    - ["/vars/tecs_app/develop.yml", "/vars/empty_falback.yml"]
+
+  tasks:
+    - name: Pull current image
+      docker_image:
+        name: "{{docker_registry}}/{{image}}"
+        force: true
+
+    - name: Create etc/hosts
+      shell: sudo /usr/local/bin/update_hosts {{project_name}} {{project_ip}}
+
+    - template:
+        src: ../etc/nginx/{{envname}}/server.{{project_name}}.tpl
+        dest: /etc/nginx/ci/server/{{envname}}.sipay.es/{{project_name}}.location.conf
+        owner: ci
+        group: ci
+        mode: "u=rw,g=r,o=r"
+
+    - template:
+        src: ../etc/nginx/{{envname}}/upstream.{{project_name}}.tpl
+        dest: /etc/nginx/ci/upstream/{{project_name}}.conf
+        owner: ci
+        group: ci
+        mode: "u=rw,g=r,o=r"
+
+    - name: Run docker on provided environment
+      docker_container:
+        name: "{{ project_name }}"
+        image: "{{docker_registry}}/{{image}}"
+        recreate: yes
+        restart: yes
+        restart_policy: always
+        timeout: 90
+        ports:
+        networks:
+          - name: "{{network}}"
+            ipv4_address: "{{project_ip}}"
+
+    - name: Make nginx test
+      shell: sudo /usr/sbin/service nginx configtest
+
+    - name: Reload nginx config
+      shell: sudo /usr/sbin/service nginx reload

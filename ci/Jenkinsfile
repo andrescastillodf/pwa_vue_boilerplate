@@ -1,0 +1,46 @@
+node {
+    def app
+
+    def BUILD_ENV
+    def BUILD_BRANCH
+    def DOCKER_VERSION
+
+    stage('Clone repository') {
+        deleteDir()
+        checkout scm
+        BUILD_ENV = env.BRANCH_NAME
+        BUILD_BRANCH = env.BRANCH_NAME
+        DOCKER_VERSION = "${BUILD_ENV}"
+        if (BUILD_BRANCH.split('/')[0] == "release"){
+           BUILD_BRANCH = BUILD_BRANCH.split('/')[1]
+           DOCKER_VERSION = BUILD_BRANCH
+           BUILD_ENV = "live"
+        } else if (BUILD_ENV != "master" && BUILD_ENV != "develop") {
+            BUILD_ENV = "develop"
+            BUILD_BRANCH = "develop"
+        } else if (BUILD_ENV == "master"){
+            BUILD_ENV = "sandbox"
+        }
+        echo "Env and branch: ${BUILD_ENV} ${BUILD_BRANCH}"
+    }
+
+    stage('Build image') {
+        /* This builds the actual image; synonymous to
+         * docker build on the command line */
+        app = docker.build("tecs_app:${DOCKER_VERSION}", "-f ci/Dockerfile_${BUILD_BRANCH} .")
+    }
+
+    stage('Push image') {
+        docker.withRegistry('http://docker-registry:5000/') {
+            app.push("${BUILD_BRANCH}")
+        }
+    }
+
+    stage('Deploy') {
+        if (BUILD_ENV != "live"){
+          retry(3) {
+              sh(script: "ansible-playbook -e \"workspace=${workspace} build_branch=${BUILD_BRANCH} envname=${BUILD_ENV}\" -l ${BUILD_ENV} ci/playbook.yml")
+          }
+        }
+    }
+}
