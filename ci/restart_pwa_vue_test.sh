@@ -14,6 +14,8 @@ ARGS="--debug"
 INTERNAL_PORT="8080"
 EXTERNAL_PORT="3005"
 
+IMAGE_ID=$(docker inspect --format='{{.Image}}' $(docker ps -aq -f name=pwa_vue_example))
+echo ${IMAGE_ID}
 docker stop $CONTAINER || true && docker rm $CONTAINER || true
 
 docker run \
@@ -25,3 +27,5 @@ docker run \
        -v $VOLUME/logs:/usr/src/app/logs \
        -d $IMAGE
        #$ARGS
+
+docker rmi ${IMAGE_ID} || true

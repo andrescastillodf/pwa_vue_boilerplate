@@ -45,7 +45,6 @@ VERSION=`readJson package.json version` || exit 1;
 #if there is not package.json use "VERSION" file
 #VERSION=`cat VERSION`
 #echo "VERSION: ${VERSION}"
-
 sudo docker build -t ${IMAGE}:${VERSION} . -f ${DOCKERFILE}
 sudo docker tag pwa_vue_example:${VERSION}  pwa_vue_example:latest
 
