@@ -2,10 +2,9 @@
 #source /etc/environment
 
 
-IMAGE="pwa_vue_example"
-CONTAINER="pwa_vue_example"
-BASH_SOURCE="/home/andres/projects/vue-andres-projects/pwa_vue_example/"
-DOCKERFILE="/home/andres/projects/vue-andres-projects/pwa_vue_example/ci/Dockerfile"
+IMAGE="pwa_vue_boilerplate"
+BASH_SOURCE="/home/andres/www/pwa_vue_boilerplate/"
+DOCKERFILE="/home/andres/www/pwa_vue_boilerplate/ci/Dockerfile"
 
 #use ssh
 eval `ssh-agent`
@@ -34,8 +33,8 @@ function readJson {
 #docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
 #docker pull $IMAGE
 #docker logout
-
-cd "/home/andres/projects/vue-andres-projects/pwa_vue_example/"
+echo "hola"
+cd "/home/andres/www/pwa_vue_boilerplate/"
 pwd
 git checkout master
 git pull
@@ -46,6 +45,6 @@ VERSION=`readJson package.json version` || exit 1;
 #VERSION=`cat VERSION`
 #echo "VERSION: ${VERSION}"
 sudo docker build -t ${IMAGE}:${VERSION} . -f ${DOCKERFILE}
-sudo docker tag pwa_vue_example:${VERSION}  pwa_vue_example:latest
+sudo docker tag pwa_vue_boilerplate:${VERSION}  pwa_vue_boilerplate:latest
 
 
